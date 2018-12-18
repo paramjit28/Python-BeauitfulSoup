@@ -1,2 +1,11 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+import requests
+from bs4 import BeautifulSoup
+url = requests.get('https://www.imdb.com/list/ls045244872/?ref_=rls_1')
+
+soup = BeautifulSoup(url.content, 'html.parser')
+
+movies_list = soup.find_all(class_= 'lister-item-header')
+
+for span in movies_list:
+    print(span.text)
+
